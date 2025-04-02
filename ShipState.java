@@ -24,7 +24,7 @@ public enum ShipState implements Serializable {
     RESTING(" Resting"), 
     SUNK(" Sunk");
 
-    private String state;
+    private final String state;
 
     // Constructor to set the description of each state
     private ShipState(String st) {
@@ -32,6 +32,7 @@ public enum ShipState implements Serializable {
     }
 
     // Returns the description of the state
+    @Override
     public String toString() {
         return state;
     }
