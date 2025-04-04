@@ -32,8 +32,36 @@ public class Ship {
     {
         return name;
     }
+   public String getCaptain()
+    {
+        return captain;
+    }
+   
+   public int getbattleskill()
+    {
+        return battleskill;
+    }
+   
+   public int getCommissionFee()
+    {
+        return commissionFee;
+    }
+   
+   public String getStatus()
+    {
+        return status;
+    }
+   
    
    //mutators here
    
+   public String toString()
+    {
+        return "\nShip name: " + name +
+                "\nCaptain: " + captain +
+                "\nBattle Skill: " + battleskill +
+                "\nCommission Fee: " + commissionFee +
+                "\nShip Status: " + status;
+    }
    
 }
