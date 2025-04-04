@@ -42,24 +42,41 @@ public class GameUI
             else if (choice == 4)
             {
                 //write your code here
+                System.out.println("Enter ship name: ");
+                String nme = myIn.nextLine();
+                System.out.println(myBattles.commissionShip(nme));
 
             }
             else if (choice == 5)
             {
        	       //write your code here
-       
+               System.out.println("Enter the encounter number of the encounter you want to fight: ");
+               int encounterNum = myIn.nextInt();
+               boolean isEnc = myBattles.isEncounter(encounterNum);
+               if (isEnc){
+                   System.out.println(myBattles.fightEncounter(encounterNum));
+               }
+               else {
+                   System.out.println("Encounter doesn't exist try again");
+                   getMenuItem();
+               }
+               
                   
             }
             else if (choice ==6)
             {
 	        //write your code here
-
+                System.out.println("Enter ship name: ");
+                String nme = myIn.nextLine();
+                myBattles.restoreShip(nme);
 
             }
             else if (choice == 7)
             {
                 //write your code here
-
+                System.out.println("Enter ship name: ");
+                String nme = myIn.nextLine();
+                System.out.println(myBattles.decommissionShip(nme));
 
             }
             else if (choice==8)
