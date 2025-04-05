@@ -46,7 +46,12 @@ public class Encounter implements Serializable {
    }
 
    @Override
-   public String toString() {
-       return String.format("Encounter #%d: %s at %s | Skill: %d | Prize: £%d", encounterNo, type.toString().trim(), location, requiredSkill, prizeMoney);
-   }
+   public String toString()
+    {
+        return "\nEncounter: " + encounterNo +
+                "\ntype: " + type +
+                "\nlocation: " + location +
+                "\nskill: " + requiredSkill +
+                "\nPrize: " + prizeMOney;
+    }
 }

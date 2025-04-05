@@ -15,14 +15,14 @@ public class Ship {
    private String captain;
    private int battleskill;
    private int commissionFee;
-   private String status;
+   private ShipState status;
    
    public Ship (String name, String captain, int battleskill, int commissionFee, String status){
-       name = this.name;
-       captain = this.captain;
-       battleskill = this.battleskill;
-       commissionFee = this.commissionFee;
-       status = this.status;  
+       this.name = name;
+       this.captain = captain;
+       this.battleSkill = battleskill;
+       this.comissionFee = comissionfee;
+       this.status = ShipState.valueOf(status.toUpperCase());
    }
    
    
@@ -51,7 +51,12 @@ public class Ship {
     {
         return status;
     }
+
+    public void setState(ShipState state){
+        this.state = state;
+    }
    
+    public abstract boolean canFight(String encounterType);
    
    //mutators here
    
