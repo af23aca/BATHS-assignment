@@ -1,4 +1,5 @@
 package wars;
+import java.io.Serializable;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -7,26 +8,45 @@ package wars;
 
 /**
  *
- * @author amnafarhan
+ * @author amnafarhan, barbod
  */
-public class Encounter {
+public class Encounter implements Serializable {
    private int encounterNo;
-   private String type;
+   private EncounterType type;
    private String location;
    private int requiredSkill;
    private int prizeMoney;
-   
-   
-   public Encounter(int encounterNo, String type, String location, int requiredSkill, int prizeMoney){
-   encounterNo = this.encounterNo;
-   type = this.type;
-   location= this.location;
-   requiredSkill = this.requiredSkill;
-   prizeMoney = this.prizeMoney;
-   
+
+   public Encounter(int encounterNo, EncounterType type, String location, int requiredSkill, int prizeMoney) {
+       this.encounterNo = encounterNo;
+       this.type = type;
+       this.location = location;
+       this.requiredSkill = requiredSkill;
+       this.prizeMoney = prizeMoney;
    }
-   
-   
-   
-   
+
+   public int getEncounterNo() {
+       return encounterNo;
+   }
+
+   public EncounterType getType() {
+       return type;
+   }
+
+   public String getLocation() {
+       return location;
+   }
+
+   public int getRequiredSkill() {
+       return requiredSkill;
+   }
+
+   public int getPrizeMoney() {
+       return prizeMoney;
+   }
+
+   @Override
+   public String toString() {
+       return String.format("Encounter #%d: %s at %s | Skill: %d | Prize: £%d", encounterNo, type.toString().trim(), location, requiredSkill, prizeMoney);
+   }
 }
