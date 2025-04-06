@@ -337,6 +337,7 @@ import java.util.List;
         Ship ship = allShips.get(ref);
         if (ship != null && squadron.contains(ref) && RESTING.equals(ship.getState())) {
             ship.setState(ACTIVE);
+            squadron.add(ref);
         }
     }
     
