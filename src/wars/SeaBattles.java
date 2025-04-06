@@ -338,12 +338,56 @@ public class SeaBattles implements BATHS
       * @param encNo is the number of the encounter
       * @return a String showing the result of fighting the encounter
       */ 
-    public String fightEncounter(int encNo)
-    {
-       
-            
-        return "Not done";
+      public String fightEncounter(int encNo) {
+        if (!encounters.containsKey(encNo)) {
+            return "No such encounter";
+        }
+    
+        Encounter encounter = encounters.get(encNo);
+    
+        // Find an active ship that can participate
+        Ship chosenShip = null;
+        for (String shipName : squadron) {
+            Ship ship = allShips.get(shipName);
+            if (ship != null && ACTIVE.equals(ship.getState()) && ship.getBattleSkill() >= encounter.getRequiredSkill()) {
+                chosenShip = ship;
+                break;
+            }
+        }
+    
+        StringBuilder result = new StringBuilder();
+    
+        if (chosenShip == null) {
+            // No ship available to handle encounter
+            warChest -= encounter.getPrizeMoney();
+            result.append("Encounter lost as no ship available");
+        } else {
+            if (chosenShip.getBattleSkill() >= encounter.getRequiredSkill()) {
+                // Win
+                warChest += encounter.getPrizeMoney();
+                chosenShip.setState(RESTING);
+                result.append("Encounter won by ").append(chosenShip.getName())
+                      .append(" (").append(chosenShip.getCaptain()).append(")");
+            } else {
+                // Lose and ship is sunk
+                warChest -= encounter.getPrizeMoney();
+                chosenShip.setState(SUNK);
+                squadron.remove(chosenShip.getName());
+                sunkShips.add(chosenShip.getName());
+                result.append("Encounter lost on battle skill level and ").append(chosenShip.getName()).append(" sunk/lost");
+            }
+        }
+    
+        if (isDefeated()) {
+            defeated = true;
+            result.append("\nYou have been defeated");
+        }
+    
+        result.append("\nWar Chest: ").append(warChest);
+    
+        return result.toString();
     }
+    
 
     /** Provides a String representation of an encounter given by 
      * the encounter number
