@@ -12,11 +12,10 @@ public abstract class Frigate extends Ship {
     int numberOfCannons;
     boolean hasPinnace;
     
-    public Frigate (String name, String captain, int battleskill, int commissionFee, String status, int numberOfCannons, boolean hasPinnace){
-    super(name, captain, battleskill, commissionFee, status);
-    this.numberOfCannons = numberOfCannons;
-    this.hasPinnace = hasPinnace;
-    
+    public Frigate(String name, String captain, int battleskill, int commissionFee, String status, int numberOfCannons, boolean hasPinnace, int decks, int marines, boolean hasDoctor) {
+        super(name, captain, battleskill, commissionFee, decks, marines, numberOfCannons, hasDoctor, "Frigate");
+        this.numberOfCannons = numberOfCannons;
+        this.hasPinnace = hasPinnace;
     }
     
     

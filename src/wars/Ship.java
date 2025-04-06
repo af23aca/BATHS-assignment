@@ -9,66 +9,68 @@ package wars;
  *
  * @author amnafarhan
  */
-public abstract class Ship {
+class Ship {
+    private String name;
+    private String captain;
+    private int battleSkill;
+    private int commissionFee;
+    private int decks;
+    private int marines;
+    private int cannons;
+    private boolean hasDoctor;
+    private String shipType;
+    private String state;
     
-   private String name;
-   private String captain;
-   private int battleskill;
-   private int commissionFee;
-   private ShipState status;
-   
-   public Ship (String name, String captain, int battleskill, int commissionfee, String status){
-       this.name = name;
-       this.captain = captain;
-       this.battleskill = battleskill;
-       this.commissionFee = commissionfee;
-       this.status = ShipState.valueOf(status.toUpperCase());
-   }
-   
-   
-   //Acessors here 
-   
-   public String getShipName()
-    {
+    public Ship(String name, String captain, int battleSkill, int commissionFee, 
+               int decks, int marines, int cannons, boolean hasDoctor, String shipType) {
+        this.name = name;
+        this.captain = captain;
+        this.battleSkill = battleSkill;
+        this.commissionFee = commissionFee;
+        this.decks = decks;
+        this.marines = marines;
+        this.cannons = cannons;
+        this.hasDoctor = hasDoctor;
+        this.shipType = shipType;
+        this.state = "Reserve"; // Default state
+    }
+    
+    public String getName() {
         return name;
     }
-   public String getCaptain()
-    {
+    
+    public String getCaptain() {
         return captain;
     }
-   
-   public int getbattleskill()
-    {
-        return battleskill;
+    
+    public int getBattleSkill() {
+        return battleSkill;
     }
-   
-   public int getCommissionFee()
-    {
+    
+    public int getCommissionFee() {
         return commissionFee;
     }
-   
-   public String getStatus()
-    {
-        return status.toString();
+    
+    public String getShipType() {
+        return shipType;
     }
-
-    public void setState(ShipState state){
-        this.status = state;
+    
+    public String getState() {
+        return state;
     }
-   
-    public abstract boolean canFight(String encounterType);
-   
-   //mutators here
-   
-
-   @Override
-   public String toString()
-    {
-        return "\nShip name: " + name +
-                "\nCaptain: " + captain +
-                "\nBattle Skill: " + battleskill +
-                "\nCommission Fee: " + commissionFee +
-                "\nShip Status: " + status;
+    
+    public void setState(String state) {
+        this.state = state;
     }
-   
+    
+    public boolean hasDoctor() {
+        return hasDoctor;
+    }
+    
+    @Override
+    public String toString() {
+        return name + " (" + shipType + "), Captain: " + captain + 
+               ", Battle Skill: " + battleSkill + 
+               ", State: " + state;
+    }
 }

@@ -11,10 +11,9 @@ package wars;
 public abstract class Sloop extends Ship {
     private boolean hasDoctor;
     
-    public Sloop (String name, String captain, int battleskill, int commissionFee, String status,boolean hasDoctor){
-    super(name, captain, 5, commissionFee, status);
-    hasDoctor = this.hasDoctor;
-    
+    public Sloop(String name, String captain, int battleskill, int commissionFee, String status, boolean hasDoctor) {
+        super(name, captain, battleskill, commissionFee, 1, 10, 2, hasDoctor, "Sloop");
+        this.hasDoctor = hasDoctor;
     }
     
     

@@ -360,16 +360,49 @@ public class SeaBattles implements BATHS
 
     //****************** private methods for Task 4 functionality*******************
     //*******************************************************************************
-     private void setupShips()
-     {
-       
-
-     }
+    private void setupShips()
+    {
+        // Create ships from Appendix A
+        addShip("Victory", "Alan Aikin", 3, 300, 3, 30, 0, true, MANOWAR);
+        addShip("Sophie", "Ben Baggins", 8, 400, 0, 0, 16, true, FRIGATE);
+        addShip("Endeavour", "Col Cannon", 4, 275, 2, 20, 0, false, MANOWAR);
+        addShip("Arrow", "Dan Dare", 5, 150, 0, 0, 0, true, SLOOP);
+        addShip("Bellerophon", "Ed Evans", 8, 450, 3, 50, 0, false, MANOWAR);
+        addShip("Surprise", "Fred Fox", 6, 300, 0, 0, 10, false, FRIGATE);
+        addShip("Jupiter", "Gil Gamage", 7, 350, 0, 0, 20, false, FRIGATE);
+        addShip("Paris", "Hal Henry", 4, 200, 0, 0, 0, false, SLOOP);
+        addShip("Beast", "Ian Idle", 5, 400, 0, 0, 0, false, SLOOP);
+        addShip("Athena", "John Jones", 6, 100, 0, 0, 0, true, SLOOP);
+        
+        // Place all ships in reserve fleet initially
+        for (String shipName : allShips.keySet()) {
+            reserveFleet.add(shipName);
+        }
+    }
+    
+    private void addShip(String name, String captain, int battleSkill, int commissionFee, 
+                         int decks, int marines, int cannons, boolean hasDoctor, String shipType) {
+        Ship newShip = new Ship(name, captain, battleSkill, commissionFee, 
+                                decks, marines, cannons, hasDoctor, shipType);
+        allShips.put(name, newShip);
+    }
      
     private void setupEncounters()
     {
-  
+                // Create encounters from Appendix A
+        encounters.put(1, new Encounter(1, EncounterType.BATTLE, "Trafalgar", 3, 300));
+        encounters.put(2, new Encounter(2, EncounterType.SKIRMISH, "Belle Isle", 3, 120));
+        encounters.put(3, new Encounter(3, EncounterType.BLOCKADE, "Brest", 3, 150));
+        encounters.put(4, new Encounter(4, EncounterType.BATTLE, "St Malo", 9, 200));
+        encounters.put(5, new Encounter(5, EncounterType.BLOCKADE, "Dieppe", 7, 90));
+        encounters.put(6, new Encounter(6, EncounterType.SKIRMISH, "Jersey", 8, 45));
+        encounters.put(7, new Encounter(7, EncounterType.BLOCKADE, "Nantes", 6, 130));
+        encounters.put(8, new Encounter(8, EncounterType.BATTLE, "Finisterre", 4, 100));
+        encounters.put(9, new Encounter(9, EncounterType.SKIRMISH, "Biscay", 5, 200));
+        encounters.put(10, new Encounter(10, EncounterType.BATTLE, "Cadiz", 1, 250));
     }
+
+    
         
     // Useful private methods to "get" objects from collections/maps
 
@@ -386,11 +419,8 @@ public class SeaBattles implements BATHS
      */
     public void readEncounters(String filename)
     { 
-      
         
-        
-    }   
- 
+    }
     
     // ***************   file write/read  *********************
     /** Writes whole game to the specified file
