@@ -8,7 +8,7 @@ package wars;
  *
  * @author amnafarhan
  */
-public class Sloop extends Ship {
+public abstract class Sloop extends Ship {
     private boolean hasDoctor;
     
     public Sloop (String name, String captain, int battleskill, int commissionFee, String status,boolean hasDoctor){
@@ -23,9 +23,8 @@ public class Sloop extends Ship {
         return hasDoctor;
     }
 
-    @Ovverride
     public boolean canFight(EncounterType type){
-        return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH
+        return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH;
     }
     
     @Override

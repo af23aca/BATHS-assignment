@@ -9,14 +9,14 @@ package wars;
  *
  * @author amnafarhan, barbod
  */
-public class ManOWar extends Ship {
+public abstract class ManOWar extends Ship {
     private int numberOfDecks;
     private int numberOfMarines;
     
     public ManOWar (String name, String captain, int battleskill, int commissionFee, String status, int numberOfDecks, int numberofMarines){
     super(name, captain, battleskill, commissionFee, status);
     numberOfDecks = this.numberOfDecks;
-    numberOfMarines = this.numberOfMarines;
+    this.numberOfMarines = numberOfMarines;
     
     }
     
@@ -29,9 +29,8 @@ public int numMarines(){
     return numberOfMarines;
 }
 
-@Override
 public boolean canFight(EncounterType type){
-    return type == EncounterType.BATTLE || type == EncounterType.BLOACKADE;
+    return type == EncounterType.BATTLE || type == EncounterType.BLOCKADE;
 }
 
 

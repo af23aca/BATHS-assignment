@@ -8,7 +8,7 @@ package wars;
  *
  * @author amnafarhan
  */
-public class Frigate extends Ship {
+public abstract class Frigate extends Ship {
     int numberOfCannons;
     boolean hasPinnace;
     
@@ -29,7 +29,6 @@ public class Frigate extends Ship {
         return hasPinnace;
     }
 
-    @Override
     public boolean canFight(EncounterType type){
         return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH || (type == EncounterType.BLOCKADE && hasPinnace);
     }

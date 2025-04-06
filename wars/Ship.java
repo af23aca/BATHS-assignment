@@ -9,7 +9,7 @@ package wars;
  *
  * @author amnafarhan
  */
-public class Ship {
+public abstract class Ship {
     
    private String name;
    private String captain;
@@ -17,11 +17,11 @@ public class Ship {
    private int commissionFee;
    private ShipState status;
    
-   public Ship (String name, String captain, int battleskill, int commissionFee, String status){
+   public Ship (String name, String captain, int battleskill, int commissionfee, String status){
        this.name = name;
        this.captain = captain;
-       this.battleSkill = battleskill;
-       this.comissionFee = comissionfee;
+       this.battleskill = battleskill;
+       this.commissionFee = commissionfee;
        this.status = ShipState.valueOf(status.toUpperCase());
    }
    
@@ -49,17 +49,19 @@ public class Ship {
    
    public String getStatus()
     {
-        return status;
+        return status.toString();
     }
 
     public void setState(ShipState state){
-        this.state = state;
+        this.status = state;
     }
    
     public abstract boolean canFight(String encounterType);
    
    //mutators here
    
+
+   @Override
    public String toString()
     {
         return "\nShip name: " + name +

@@ -52,6 +52,6 @@ public class Encounter implements Serializable {
                 "\ntype: " + type +
                 "\nlocation: " + location +
                 "\nskill: " + requiredSkill +
-                "\nPrize: " + prizeMOney;
+                "\nPrize: " + prizeMoney;
     }
 }

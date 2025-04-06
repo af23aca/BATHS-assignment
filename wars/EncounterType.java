@@ -17,6 +17,8 @@ public enum EncounterType implements Serializable
         type = ty;
     }
     
+
+    @Override
     public String toString()
     {
         return type;

@@ -1,6 +1,5 @@
 package wars;
 
-import java.io.*;
 import java.util.*;
 /**
  * Task 2 - provide command line interface
