@@ -1,5 +1,10 @@
 package wars;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -393,7 +398,12 @@ public class SeaBattles implements BATHS
      */
     public void saveGame(String fname)
     {   // uses object serialisation 
-           
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fname))) {
+            out.writeObject(this);
+            System.out.println("Game saved successfully to " + fname);
+        } catch (IOException e) {
+            System.err.println("Error saving game: " + e.getMessage());
+        }
     }
     
     /** reads all information about the game from the specified file 
@@ -403,9 +413,15 @@ public class SeaBattles implements BATHS
      */
     public SeaBattles loadGame(String fname)
     {   // uses object serialisation 
-       
-        return null;
-    } 
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fname))) {
+            SeaBattles game = (SeaBattles) in.readObject();
+            System.out.println("Game loaded successfully from " + fname);
+            return game;
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading game: " + e.getMessage());
+            return null;
+        }
+    }
     
  
 }
