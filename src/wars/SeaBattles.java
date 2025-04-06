@@ -353,6 +353,10 @@ public class SeaBattles implements BATHS
      **/
     public String getEncounter(int num)
     {
+        Encounter encounter = encounters.get(num);
+        if (encounter != null) {
+            return encounter.toString();
+        }
         
         return "\nNo such encounter";
     }
