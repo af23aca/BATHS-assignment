@@ -159,7 +159,7 @@ import java.util.List;
      */
     public double getWarChest()
     {
-        return 0;
+        return warChest;
     }
     
     
