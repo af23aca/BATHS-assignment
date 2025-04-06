@@ -264,11 +264,26 @@ public class SeaBattles implements BATHS
     {
         Ship ship = allShips.get(nme);
         if (ship == null) {
-            return "Ship not found";
+            return "Not found";
         }
-
-
-        return "ship commissioned";
+        
+        if (!reserveFleet.contains(nme)) {
+            return "Not available";
+        }
+        
+        if (warChest < ship.getCommissionFee()) {
+            return "Not enough money";
+        }
+        
+        // Deduct commission fee from war chest
+        warChest -= ship.getCommissionFee();
+        
+        // Update ships status
+        reserveFleet.remove(nme);
+        squadron.add(nme);
+        ship.setState(ACTIVE);
+        
+        return "Ship commissioned";
     }
         
     /** Returns true if the ship with the name is in the admiral's squadron, false otherwise.
