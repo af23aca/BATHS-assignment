@@ -8,6 +8,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 /**
  * This class implements the behaviour expected from the BATHS
  system as required for 5COM2007 Cwk1B BATHS - Feb 2025
@@ -484,7 +488,16 @@ public class SeaBattles implements BATHS
      */
     public void readEncounters(String filename)
     { 
+      try {
+        List<String> encounters = Files.readAllLines(Paths.get(filename));
 
+        for (String encounter : encounters) {
+            System.out.println(encounter);
+            }   
+       } 
+      catch (IOException e) {
+        System.err.println("Error reading file: " + e.getMessage());
+        }
     }
     
     // ***************   file write/read  *********************
