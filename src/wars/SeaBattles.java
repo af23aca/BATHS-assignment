@@ -284,7 +284,21 @@ public class SeaBattles implements BATHS
      **/
     public boolean decommissionShip(String nme)
     {
-        return false;
+        if (!isInSquadron(nme)) {
+            return false;
+        }
+        
+        Ship ship = allShips.get(nme);
+        if (ship == null) {
+            return false;
+        }
+        
+        // Update ship status
+        squadron.remove(nme);
+        reserveFleet.add(nme);
+        ship.setState(RESERVE);
+        
+        return true;
     }
     
     
@@ -294,7 +308,10 @@ public class SeaBattles implements BATHS
      */
     public void restoreShip(String ref)
     {
-
+        Ship ship = allShips.get(ref);
+        if (ship != null && squadron.contains(ref) && RESTING.equals(ship.getState())) {
+            ship.setState(ACTIVE);
+        }
     }
     
 //**********************Encounters************************* 
@@ -419,7 +436,7 @@ public class SeaBattles implements BATHS
      */
     public void readEncounters(String filename)
     { 
-        
+
     }
     
     // ***************   file write/read  *********************
@@ -455,3 +472,5 @@ public class SeaBattles implements BATHS
     
  
 }
+
+
