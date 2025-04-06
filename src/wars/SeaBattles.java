@@ -19,7 +19,7 @@ import java.util.List;
  * @version 16/02/25
  */
 
-public class SeaBattles implements BATHS 
+ public class SeaBattles implements BATHS, java.io.Serializable
 {
     // may have one HashMap and select on stat
     // Ship states
@@ -260,25 +260,29 @@ public class SeaBattles implements BATHS
      * ship not found, "Not available" if ship is not in the fleet, "Not 
      * enough money" if not enough money in the warChest
      **/        
-    public String commissionShip(String nme)
-    {
+    public String commissionShip(String nme) {
         Ship ship = allShips.get(nme);
         if (ship == null) {
-            return "Not found";
+            return "Ship not found";
         }
         
+        // Check if ship is already in squadron
+        if (squadron.contains(nme)) {
+            return "Not available";
+        }
+        
+        // Check if ship is in reserve fleet
         if (!reserveFleet.contains(nme)) {
             return "Not available";
         }
         
+        // Check if enough money
         if (warChest < ship.getCommissionFee()) {
             return "Not enough money";
         }
         
-        // Deduct commission fee from war chest
+        // Commission the ship
         warChest -= ship.getCommissionFee();
-        
-        // Update ships status
         reserveFleet.remove(nme);
         squadron.add(nme);
         ship.setState(ACTIVE);
@@ -310,6 +314,10 @@ public class SeaBattles implements BATHS
         if (ship == null) {
             return false;
         }
+        
+        // Return half of the commission fee to war chest
+        double refund = ship.getCommissionFee() / 2.0;
+        warChest += refund;
         
         // Update ship status
         squadron.remove(nme);
