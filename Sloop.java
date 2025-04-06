@@ -9,11 +9,10 @@ package wars;
  * @author amnafarhan
  */
 public class Sloop extends Ship {
-    boolean hasDoctor;
+    private boolean hasDoctor;
     
-    public Sloop (String name, String captain, int battleskill, int commissionFee, String status,
-                  boolean hasDoctor){
-    super(name, captain, battleskill, commissionFee, status);
+    public Sloop (String name, String captain, int battleskill, int commissionFee, String status,boolean hasDoctor){
+    super(name, captain, 5, commissionFee, status);
     hasDoctor = this.hasDoctor;
     
     }
@@ -22,6 +21,11 @@ public class Sloop extends Ship {
     //accesors
     public boolean hasDoctor(){
         return hasDoctor;
+    }
+
+    @Ovverride
+    public boolean canFight(EncounterType type){
+        return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH
     }
     
     @Override

@@ -12,29 +12,32 @@ public class Frigate extends Ship {
     int numberOfCannons;
     boolean hasPinnace;
     
-    public Frigate (String name, String captain, int battleskill, int commissionFee, String status, 
-                    int numberOfCannons, boolean hasPinnace){
+    public Frigate (String name, String captain, int battleskill, int commissionFee, String status, int numberOfCannons, boolean hasPinnace){
     super(name, captain, battleskill, commissionFee, status);
-    
-    numberOfCannons = this.numberOfCannons;
-    hasPinnace = this.hasPinnace;
+    this.numberOfCannons = numberOfCannons;
+    this.hasPinnace = hasPinnace;
     
     }
     
     
     //accessors 
-    public int numCannons(){
+    public int getNumberOfCannons(){
         return numberOfCannons;
     }
     
-    public boolean pinnace(){
+    public boolean hasPinnace(){
         return hasPinnace;
+    }
+
+    @Override
+    public boolean canFight(EncounterType type){
+        return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH || (type == EncounterType.BLOCKADE && hasPinnace);
     }
     
     @Override
     public String toString() {
-        return super.toString() + "Number of cannons: " + numberOfCannons
-                + "\nHas Pinnace? " + hasPinnace;
+        return super.toString() + "\nType: Frigate" +
+                "\nNumber of cannons: " + numberOfCannons + "\nHas Pinnace? " + hasPinnace;
         
     }
       
