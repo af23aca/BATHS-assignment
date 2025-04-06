@@ -5,11 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -486,17 +485,26 @@ public class SeaBattles implements BATHS
      * encounters.Data in the file is editable
      * @param fileName name of the file to be read
      */
-    public void readEncounters(String filename)
-    { 
-      try {
-        List<String> encounters = Files.readAllLines(Paths.get(filename));
-
-        for (String encounter : encounters) {
-            System.out.println(encounter);
-            }   
-       } 
-      catch (IOException e) {
-        System.err.println("Error reading file: " + e.getMessage());
+    public void readEncounters(String filename) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                if (parts.length == 5) {
+                    int encounterNo = Integer.parseInt(parts[0]);
+                    EncounterType type = EncounterType.valueOf(parts[1].toUpperCase());
+                    String location = parts[2];
+                    int requiredSkill = Integer.parseInt(parts[3]);
+                    int prizeMoney = Integer.parseInt(parts[4]);
+    
+                    Encounter encounter = new Encounter(encounterNo, type, location, requiredSkill, prizeMoney);
+                    encounters.put(encounterNo, encounter);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error processing encounters: " + e.getMessage());
         }
     }
     
